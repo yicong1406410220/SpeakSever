@@ -170,7 +170,7 @@ namespace SpeakSever
                         str += dataReader["name"] + ":" + dataReader["msg"] + "\n\r";
                     }
                     dataReader.Close();
-                    byte[] bytes = System.Text.Encoding.Default.GetBytes(str);
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(str);
                     conn.socket.Send(bytes);
                 }
                 catch(Exception e)
