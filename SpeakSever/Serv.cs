@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using MySql.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -16,6 +18,8 @@ namespace SpeakSever
         public Conn[] conns;
         //最大连接数
         public int maxConn = 50;
+
+        MySqlConnection sqlconn;
 
         //获取连接池索引，返回负数表示获取失败
         public int NewIndex()
@@ -40,6 +44,20 @@ namespace SpeakSever
         //开启服务器
         public void Start(string host, int port)
         {
+            //数据库
+            string connStr = "Database=msgboard; Data Source=rm-uf679u840smz34fcxfo.mysql.rds.aliyuncs.com;";
+            connStr += "User Id=root; Password=Azazaz12; port=3306";
+            sqlconn = new MySqlConnection(connStr);
+            try
+            {
+                sqlconn.Open();
+            }
+            catch (Exception e)
+            {
+                Console.Write("[数据库]连接失败" + e.Message);
+                return;
+            }
+
             //连接池
             conns = new Conn[maxConn];
             for (int i = 0; i < maxConn; i++)
