@@ -159,7 +159,7 @@ namespace SpeakSever
             //获取数据
             if(str.Contains("_GET"))
             {
-                string cmdStr = "select * from msg order by id desc limit 10;";
+                string cmdStr = "select * from msg order by id asc limit 10;";
                 MySqlCommand cmd = new MySqlCommand(cmdStr, sqlconn);
                 try
                 {
